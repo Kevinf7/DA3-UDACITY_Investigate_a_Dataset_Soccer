@@ -1,0 +1,13 @@
+select l.name league_name, m.season, m.stage, m.date match_date, 
+th.team_long_name home_team, ta.team_long_name away_team,
+m.home_team_goal home_goals, m.away_team_goal away_goals,
+m.home_team_api_id home_team_id, m.away_team_api_id away_team_id,
+m.goal goal_details, m.possession possession
+from match m
+inner join team th on (th.team_api_id = m.home_team_api_id)
+inner join team ta on (ta.team_api_id = m.away_team_api_id)
+inner join league l on (l.country_id = m.country_id)
+where 
+l.country_id = 1729 -- English Premier League
+--m.home_team_api_id = 8650 --Liverpool
+order by match_date asc
